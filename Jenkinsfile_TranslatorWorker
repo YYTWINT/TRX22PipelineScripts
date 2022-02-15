@@ -18,7 +18,7 @@ pipeline {
 		}
 		
 		stage('CreateUnit') {
-            agent { label 'TRX22-build-machine-zkx3un' }
+            agent { label 'TRX22-build-machine-yytwint' }
             steps {
 				script{
 					gv.createUnit() 
@@ -26,7 +26,7 @@ pipeline {
             }
         }
         stage('Build') {
-            agent { label 'TRX22-build-machine-zkx3un' }
+            agent { label 'TRX22-build-machine-yytwint' }
             steps {
 				script{
 					gv.buildUnit() 
@@ -34,7 +34,7 @@ pipeline {
             }
         }
 		stage('Test') {
-            agent { label 'TRX22-build-machine-zkx3un' }
+            agent { label 'TRX22-build-machine-yytwint' }
             steps {
 				script{
 					gv.TestUnit() 
