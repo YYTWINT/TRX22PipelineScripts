@@ -1,0 +1,71 @@
+def gv
+def emailHandle
+
+pipeline {
+    agent any
+	parameters {
+		string(name: 'NXRelease', defaultValue: 'nx2206.latest', description : 'Use the latest IP from NX2206 release to create the build.')
+		string(name: 'UnitPath', defaultValue: '/plm/pnnas/ppic/users/rakesht/JenkinsBuildUnits/NX2206', description : 'Path where build unit for the run is to be created.')
+		string(name: 'CPNumber', defaultValue: '0', description : 'CP number on top of NXRelease against which build and test steps to be executed.')
+	}
+    stages {
+		stage ('init'){
+			steps {
+				script{
+					gv = load "TranslatorWorkerScripts_CP_image.groovy"
+					emailHandle = load "email.groovy"
+				}
+			}
+		}
+		
+		stage('CreateUnit') {
+            agent { label 'di2inpun0050lv0' }
+			
+            steps {
+				script{
+					if (params.CPNumber != "0"){
+						gv.createUnitCPImage()
+					}
+					else
+					{
+						echo 'CP number is not specified correctly.'						
+					}
+				}					
+            }
+        }
+        stage('Build') {
+            agent { label 'di2inpun0050lv0' }
+			
+            steps {
+				script{
+					gv.buildUnitCPImage() 
+				}					
+            }
+        }
+		stage('Test') {
+            agent { label 'di2inpun0050lv0' }
+			
+            steps {
+				script{
+					gv.TestUnitCPImage() 
+				}					
+            }
+        }
+    }
+
+    post {
+		
+        success {
+            echo 'All tasks completed successfully.'
+        }
+		failure {
+			echo 'One or more stages have failed.'
+		}
+		always {
+			script{
+				emailHandle.sendSuccessEmail()
+			}					
+		}
+		
+    }
+}
