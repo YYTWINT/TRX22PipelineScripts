@@ -20,11 +20,11 @@ if [ ! -d ${DEPLOY_DIR} ]
 then
 	echo "Creating deployment directory ${DEPLOY_DIR}"
 	mkdir -p ${DEPLOY_DIR}
-	chmod -r 0755 ${DEPLOY_DIR}
+	chmod -R 0755 ${DEPLOY_DIR}
 fi
 
 # Copy all 
-cp -r ${SOURCE_PATH}/   ${DEPLOY_DIR}/
+cp -r ${SOURCE_PATH}/*   ${DEPLOY_DIR}/
 
 # Then remove selected iteams
 rm -rf ${DEPLOY_DIR}/debug
