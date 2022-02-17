@@ -14,7 +14,7 @@ DEPLOY_DIR=${DEPLOY_BASE_DIR}/TranslatorBinaries/
 
 SOURCE_PATH=${UNIT_PATH}/lnx64/Products/TranslatorWorker
 RUN_FILE=${SOURCE_PATH}/pvtrans/run_ugtopv
-CONFIG_FILE=${SOURCE_PATH}/pvtrans/tessUG.config
+CONFIG_FILE=${DEPLOY_DIR}/pvtrans/tessUG.config
 
 if [ ! -d ${DEPLOY_DIR} ]
 then
@@ -32,9 +32,9 @@ rm -rf ${DEPLOY_DIR}/license
 rm -rf ${DEPLOY_DIR}/dockerfile
 
 cp  ${RUN_FILE}            ${DEPLOY_DIR}/
-cp  ${CONFIG_FILE}         ${DEPLOY_BASE_DIR}/
+#cp  ${CONFIG_FILE}         ${DEPLOY_BASE_DIR}/
 
-DEPLOYED_CONFIG_FILE=${DEPLOY_BASE_DIR}/tessUG.config
+DEPLOYED_CONFIG_FILE=${CONFIG_FILE}
 chmod 0755 ${DEPLOYED_CONFIG_FILE}
 
 sed -i 's/UGII_PV_TRANS_MODEL_ANN=1//g' ${DEPLOY_DIR}/run_ugtopv
