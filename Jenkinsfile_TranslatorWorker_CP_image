@@ -5,9 +5,9 @@ pipeline {
     agent any
 	parameters {
 		string(name: 'NXRelease', defaultValue: 'nx2206.latest', description : 'Use the latest IP from NX2206 release to create the build.')
-		string(name: 'UnitPath', defaultValue: '/plm/pnnas/ppic/users/rakesht/JenkinsBuildUnits/NX2206', description : 'Path where build unit for the run is to be created.')
+		string(name: 'UnitPath', defaultValue: '/plm/pnnas/ppic/users/yytwint/JenkinsBase/units/NX2206', description : 'Path where build unit for the run is to be created.')
 		string(name: 'CPNumber', defaultValue: '0', description : 'CP number on top of NXRelease against which build and test steps to be executed.')
-		string(name: 'DeployPath', defaultValue: '/plm/pnnas/ppic/users/rakesht/JenkinsDeploy/NX2206', description : 'Path where translator worker kits are to be deployed.')
+		string(name: 'DeployPath', defaultValue: '/plm/pnnas/ppic/users/yytwint/JenkinsBase/deploy/NX2206', description : 'Path where translator worker kits are to be deployed.')
 }
     stages {
 		stage ('init'){
