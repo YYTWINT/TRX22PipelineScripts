@@ -6,6 +6,7 @@ pipeline {
 	parameters {
 		string(name: 'NXRelease', defaultValue: 'nx2206.latest', description : 'Use the latest IP from NX2206 release to create the build.')
 		string(name: 'UnitPath', defaultValue: '/plm/pnnas/ppic/users/rakesht/JenkinsBuildUnits/NX2206', description : 'Path where build unit for the run is to be created.')
+		string(name: 'DeployPath', defaultValue: '/plm/pnnas/ppic/users/rakesht/JenkinsDeploy/NX2206', description : 'Path where translator worker kits are to be deployed.')
 	}
     stages {
 		stage ('init'){
@@ -38,6 +39,14 @@ pipeline {
             steps {
 				script{
 					gv.TestUnit() 
+				}					
+            }
+        }
+		stage('Deploy') {
+            agent { label 'TRX22-build-machine-yytwint' }
+            steps {
+				script{
+					gv.Deploy() 
 				}					
             }
         }

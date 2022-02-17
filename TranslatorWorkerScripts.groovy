@@ -28,4 +28,15 @@ def TestUnit()
 	}
 }
 
+def Deploy()
+{
+	echo "Executing deploy..."
+	script{		
+		def unitFullPath="${params.UnitPath}/${params.NXRelease}_TranslatorWorker_${BUILD_TIMESTAMP}"
+		def deployPath="${params.DeployPath}/${params.NXRelease}_TranslatorWorker_${BUILD_TIMESTAMP}"
+		sh "chmod +x ./deployTranslatorWorkerUnit.sh "
+		sh "./deployTranslatorWorkerUnit.sh ${unitFullPath} ${deployPath}"		
+	}
+}
+
 return this

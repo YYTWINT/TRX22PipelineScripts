@@ -9,7 +9,7 @@ def sendSuccessEmail()
 	emailext(
 		subject: subject,
 		body: details,
-		to: 'yytwint.sisw@siemens.com'
+		to: 'yytwint.sisw@siemens.com,nilesh.lakhotia@siemens.com,dattaprasad.sonawadekar@siemens.com, rakesh.thakur@siemens.com'
 	)
 }
 return this
