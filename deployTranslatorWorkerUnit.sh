@@ -21,23 +21,23 @@ CONFIG_FILE=${DEPLOY_DIR}/pvtrans/tessUG.config
 if [ ! -d ${DEPLOY_DIR} ]
 then
 	echo "Creating deployment directory ${DEPLOY_DIR}"
-	mkdir -p ${DEPLOY_DIR}
-	chmod -R 0755 ${DEPLOY_DIR}
+	mkdir -p ${DEPLOY_DIR} || { exit 1;}
+	chmod -R 0777 ${DEPLOY_DIR} || { exit 1;}
 fi
 
 # Copy all 
-cp -r ${SOURCE_PATH}/*   ${DEPLOY_DIR}/
+cp -r ${SOURCE_PATH}/*   ${DEPLOY_DIR}/ || { exit 1;}
 
 # Then remove selected iteams
-rm -rf ${DEPLOY_DIR}/debug
-rm -rf ${DEPLOY_DIR}/license
-rm -rf ${DEPLOY_DIR}/dockerfile
+rm -rf ${DEPLOY_DIR}/debug || { exit 1;}
+rm -rf ${DEPLOY_DIR}/license || { exit 1;}
+rm -rf ${DEPLOY_DIR}/dockerfile || { exit 1;}
 
-cp  ${RUN_FILE}            ${DEPLOY_DIR}/
+cp  ${RUN_FILE}            ${DEPLOY_DIR}/ || { exit 1;}
 #cp  ${CONFIG_FILE}         ${DEPLOY_BASE_DIR}/
 
 DEPLOYED_CONFIG_FILE=${CONFIG_FILE}
-chmod 0755 ${DEPLOYED_CONFIG_FILE}
+chmod 0755 ${DEPLOYED_CONFIG_FILE} || { exit 1;}
 
 #sed -i 's/UGII_PV_TRANS_MODEL_ANN=1//g' ${DEPLOY_DIR}/run_ugtopv
 #sed -i 's/export UGII_PV_TRANS_MODEL_ANN//g' ${DEPLOY_DIR}/run_ugtopv
@@ -61,7 +61,7 @@ chmod 0755 ${DEPLOYED_CONFIG_FILE}
 #sed -i 's/LOD "2".*//g' ${DEPLOYED_CONFIG_FILE}
 #sed -i 's/LOD "3".*//g' ${DEPLOYED_CONFIG_FILE}
 
-cp ${CUSTOMER_ID}/run_ugtopv ${DEPLOY_DIR}/run_ugtopv
-cp ${CUSTOMER_ID}/tessUG.config ${DEPLOYED_CONFIG_FILE}
-cp ${CUSTOMER_ID}/NXJT_Translator_README.txt ${DEPLOY_BASE_DIR}/
+cp -f ${CUSTOMER_ID}/run_ugtopv ${DEPLOY_DIR}/run_ugtopv || { exit 1;}
+cp -f ${CUSTOMER_ID}/tessUG.config ${DEPLOYED_CONFIG_FILE} || { exit 1;}
+cp -f ${CUSTOMER_ID}/NXJT_Translator_README.txt ${DEPLOY_BASE_DIR}/ || { exit 1;}
 
