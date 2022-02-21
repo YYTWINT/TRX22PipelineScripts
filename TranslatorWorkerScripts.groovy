@@ -34,8 +34,9 @@ def Deploy()
 	script{		
 		def unitFullPath="${params.UnitPath}/${params.NXRelease}_TranslatorWorker_${BUILD_TIMESTAMP}"
 		def deployPath="${params.DeployPath}/${params.NXRelease}_TranslatorWorker_${BUILD_TIMESTAMP}"
+		def customerId="${params.Customer}"
 		sh "chmod +x ./deployTranslatorWorkerUnit.sh "
-		sh "./deployTranslatorWorkerUnit.sh ${unitFullPath} ${deployPath}"		
+		sh "./deployTranslatorWorkerUnit.sh ${unitFullPath} ${deployPath} 'Artifacts/${customerId}'"		
 	}
 }
 

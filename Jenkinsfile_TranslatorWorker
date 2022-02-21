@@ -7,6 +7,7 @@ pipeline {
 		string(name: 'NXRelease', defaultValue: 'nx2206.latest', description : 'Use the latest IP from NX2206 release to create the build.')
 		string(name: 'UnitPath', defaultValue: '/plm/pnnas/ppic/users/yytwint/JenkinsBase/units/NX2206', description : 'Path where build unit for the run is to be created.')
 		string(name: 'DeployPath', defaultValue: '/plm/pnnas/ppic/users/yytwint/JenkinsBase/deploy/NX2206', description : 'Path where translator worker kits are to be deployed.')
+		choice(name: 'Customer', choices: ['TRX22','ISIM'])
 	}
     stages {
 		stage ('init'){
